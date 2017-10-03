@@ -1,6 +1,14 @@
 <?php
 Class Login_Database extends CI_Model{
 
+	public function Registration_insertcus($data){
+
+	}
+
+	public function Registration_inserteo($data){
+		
+	}
+
 	public function login_admin($data){
 		
 		$condition = "username =" ."'" . $data['username']. "' AND " . "password =" ."'" .$data['password']."'";
