@@ -35,7 +35,7 @@ class user extends CI_Controller {
 		else {
 			$data = array(
 				"username" => $this->input->post('form-username'),
-				"password" => $this->input->post('form-password')
+				"password" => $this->input->post('form-username')
 			);
 			
 			if($this->input->post('user')=='Customer')
