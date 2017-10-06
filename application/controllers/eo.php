@@ -56,9 +56,16 @@ class eo extends CI_Controller {
 			redirect('display/Dashboard_eo');
 		}
 	}
-		public function Edit_produk($id)(){
-			//isi ya irshad
-		}
+		public function Edit_produk($id){
+
+		$this->form_validation->set_rules('nama', 'Nama Produk', 'required');
+		$this->form_validation->set_rules('harga', 'Harga', 'required');
+		$this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis Produk', 'required');
+
+		// terusin
+	}
+
 		
 		public function Hapus_produk($id){
 		$this->Model_products->Delete_products($id);
