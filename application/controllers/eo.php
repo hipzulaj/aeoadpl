@@ -11,6 +11,7 @@ class eo extends CI_Controller {
 	}
 
 	public function test(){
+		//ini juga gatau ijul kenapa kok dibikin function tp metodnya gaada
 	}
 	public function Transaksi_booking(){
 		if(isset($this->session->userdata['eo'])){
@@ -55,8 +56,13 @@ class eo extends CI_Controller {
 			redirect('display/Dashboard_eo');
 		}
 	}
-
-	
-
+		public function Edit_produk($id)(){
+			//isi ya irshad
+		}
+		
+		public function Hapus_produk($id){
+		$this->Model_products->Delete_products($id);
+		redirect('display/Dashboard_eo');
+	}
 	
 }

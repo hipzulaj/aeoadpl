@@ -3,6 +3,7 @@ Class Login_Database extends CI_Model{
 
 	public function Registration_insertcus($data){
 		$this->db->insert('customer', $data);
+		
 	}
 
 	public function Registration_inserteo($data){
