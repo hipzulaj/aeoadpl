@@ -1,0 +1,36 @@
+	public function register(){
+		$this->form_validation->set_rules('form-name', 'Name', 'required');
+		$this->form_validation->set_rules('form-email', 'Email', 'required');
+		$this->form_validation->set_rules('form-username', 'Username', 'required');
+		$this->form_validation->set_rules('form-password', 'Password', 'required');
+		$this->form_validation->set_rules('user', 'User', 'required');
+
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('user/login');
+		} 
+		else{
+			if($this->input->post('user')=='Customer'){
+				$data = array(
+				'C_username' => $this->input->post('form-username'),
+				'C_password' => $this->input->post('form-password'),
+				'C_email' => $this->input->post('form-email'),
+				'C_nama' => $this->input->post('form-name'),
+				);
+				$result = $this->Login_Database->Registration_insertcus($data);
+				$session_data = $data['C_username'];
+						$this->session->set_userdata('customer', $session_data);
+			}
+			elseif($this->input->post('user')=='EO'){
+				$data = array(
+				'E_username' => $this->input->post('form-username'),
+				'E_password' => $this->input->post('form-password'),
+				'E_email' => $this->input->post('form-email'),
+				'E_nama' => $this->input->post('form-name'),
+				);
+				$result = $this->Login_Database->Registration_inserteo($data);
+				$session_data = $data['E_username'];
+						$this->session->set_userdata('eo', $session_data);
+			}
+			redirect('display/index');
+		}
+	}
