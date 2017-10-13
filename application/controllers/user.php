@@ -9,27 +9,66 @@ class user extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('Login_Database');	
 		$this->load->library('form_validation');
-		//$this->load->library('../controllers/display');
 	}
+
+
+	public function register(){
+		$this->form_validation->set_rules('form-name', 'Name', 'required');
+		$this->form_validation->set_rules('form-email', 'Email', 'required');
+		$this->form_validation->set_rules('form-username', 'Username', 'required');
+		$this->form_validation->set_rules('form-password', 'Password', 'required');
+
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('user/login');
+		} 
+		else{
+			if($this->input->post('user')==''){
+				$result = "";
+				$data = array(
+					'error_message' => 'Please Select Your Role');
+				$this->load->view('user/login', $data);
+			}
+			else if($this->input->post('user')=='Customer'){
+				$data = array(
+				'C_username' => $this->input->post('form-username'),
+				'C_password' => $this->input->post('form-password'),
+				'C_email' => $this->input->post('form-email'),
+				'C_nama' => $this->input->post('form-name'),
+				);
+				$result = $this->Login_Database->Registration_insertcus($data);
+				$session_data = $data['C_username'];
+						$this->session->set_userdata('customer', $session_data);
+						redirect('display/index');
+			}
+			else if($this->input->post('user')=='EO'){
+				$data = array(
+				'E_username' => $this->input->post('form-username'),
+				'E_password' => $this->input->post('form-password'),
+				'E_email' => $this->input->post('form-email'),
+				'E_nama' => $this->input->post('form-name'),
+				);
+				$result = $this->Login_Database->Registration_inserteo($data);
+				$session_data = $data['E_username'];
+						$this->session->set_userdata('eo', $session_data);
+						redirect('display/index');
+			}
+			else $this->load->view('salah');
+		}
+	}
+
 
 	public function login()
 	{
 		$this->form_validation->set_rules('form-username', 'Username', 'required');
 		$this->form_validation->set_rules('form-password', 'Password', 'required');
-		$this->form_validation->set_rules('user', 'User', 'required');
 		if($this->form_validation->run() == false){
 			
-			if(isset($this->session->userdata['customer'])){
-				//redirect('display/Dashboard_cus');
-				$this->load->view('display/Dashboard_cus');
-			}
-			elseif (isset($this->session->userdata['eo'])){
-				//redirect('display/Dashboard_eo');
-				$this->load->view('display/Dashboard_eo');
-			}
-			else{
+			if(isset($this->session->userdata['customer']))
+				redirect('display/Dashboard_cus');
+			else if (isset($this->session->userdata['eo']))
+				redirect('display/Dashboard_eo');
+			else
 				$this->load->view('user/login');
-			}
 		}
 
 		else {
@@ -38,31 +77,45 @@ class user extends CI_Controller {
 				"password" => $this->input->post('form-password')
 			);
 			
-			if($this->input->post('user')=='Customer')
+			if($this->input->post('user')==''){
+				$result = "";
+				$data = array(
+					'error_message' => 'Please Select Your Role');
+				$this->load->view('user/login', $data);
+			}
+			else if($this->input->post('user')=='Customer')
 				$result = $this->Login_Database->login_customer($data);
-			elseif($this->input->post('user')=='EO')
+			else if($this->input->post('user')=='EO')
 				$result = $this->Login_Database->login_eo($data);
+			else {
+				$data = array(
+					'error_message' => 'Invalid Username or Password');
+				$this->load->view('user/login', $data);
+			}
 
-			if($result == false) 
-				$this->load->view('user/login');
-
-			else if ($result == true){
+			if ($result == true){
 				if ($result != false) {
 					$session_data = $data['username'];
 					if($this->input->post('user')=='Customer'){
 						$this->session->set_userdata('customer', $session_data);
+						redirect('display/index');
 					}
 					else{ 
 						$this->session->set_userdata('eo', $session_data);
+						redirect('display/index'); 
 					}
 				}
 			}
-			redirect('display/index');
+			else {
+				$data = array(
+					'error_message' => 'Invalid Username or Password');
+				$this->load->view('user/login', $data);
+			}
 		}
 	}
 
 	function logout(){
 		$this->session->sess_destroy();
-		$this->load->view('user/login');;
+		redirect('display/index');
 	}
 }
