@@ -63,7 +63,27 @@ class eo extends CI_Controller {
 		$this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
 		$this->form_validation->set_rules('jenis', 'Jenis Produk', 'required');
 
-		// terusin
+			if($this->form_validation->run() == false)
+		{
+			$data['produk'] = $this->Model_products->find($id);
+			$this->load->view('eo/Edit_produk_form', $data);
+
+			if(isset($this->session->userdata['eo'])){
+    			$this->load->view('eo/Edit_produk_form');
+			}
+			else
+				redirect('display/login');
+		}
+		else {
+			$data_products = array(
+				'nama_produk' => set_value('nama'),
+				'biaya' => set_value('harga'),
+				'deskripsi' => set_value('deskripsi'),
+				'jenis' => set_value('jenis'), 
+				);
+			$this->Model_products->Edit_products($id, $data_products);
+			redirect('display/Dashboard_eo');
+		}
 	}
 
 		
