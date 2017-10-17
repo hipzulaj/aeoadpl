@@ -10,9 +10,6 @@ class eo extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
-	public function test(){
-		//ini juga gatau ijul kenapa kok dibikin function tp metodnya gaada
-	}
 	public function Transaksi_booking(){
 		if(isset($this->session->userdata['eo'])){
     		$data['booking'] = $this->Model_booking->Get_all_book();
@@ -56,33 +53,15 @@ class eo extends CI_Controller {
 			redirect('display/Dashboard_eo');
 		}
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 	public function Edit_produk($id){
-=======
-		public function Edit_produk($id){
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
-=======
-		public function Edit_produk($id){
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 
 		$this->form_validation->set_rules('nama', 'Nama Produk', 'required');
 		$this->form_validation->set_rules('harga', 'Harga', 'required');
 		$this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
 		$this->form_validation->set_rules('jenis', 'Jenis Produk', 'required');
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 		if($this->form_validation->run() == false){
-=======
-			if($this->form_validation->run() == false)
-		{
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
-=======
-			if($this->form_validation->run() == false)
-		{
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 			$data['produk'] = $this->Model_products->find($id);
 			$this->load->view('eo/Edit_produk_form', $data);
 
@@ -90,15 +69,7 @@ class eo extends CI_Controller {
     			$this->load->view('eo/Edit_produk_form');
 			}
 			else
-<<<<<<< HEAD
-<<<<<<< HEAD
 				redirect('display/login'); 
-=======
-				redirect('display/login');
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
-=======
-				redirect('display/login');
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 		}
 		else {
 			$data_products = array(
@@ -112,23 +83,8 @@ class eo extends CI_Controller {
 		}
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public function Hapus_produk($id){
 		$this->Model_products->Delete_products($id);
 		redirect('display/Dashboard_eo');
 	}
-=======
-=======
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
-		
-		public function Hapus_produk($id){
-		$this->Model_products->Delete_products($id);
-		redirect('display/Dashboard_eo');
-	}
-	
-<<<<<<< HEAD
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
-=======
->>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 }

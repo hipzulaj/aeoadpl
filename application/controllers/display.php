@@ -23,7 +23,7 @@ class display extends CI_Controller {
 
 	public function dashboard()
 	{
-		if($this->session->userdata['admin'] != '1')
+		//if($this->session->userdata['admin'] != '1')
 		if(isset($this->session->userdata['admin']))
     		$this->load->view('admin/index');
 		else
@@ -32,7 +32,7 @@ class display extends CI_Controller {
 
 	public function Dashboard_cus()
 	{
-		if($this->session->userdata['logged_in'] != '1')
+		//if($this->session->userdata['logged_in'] != '1')
 		if(isset($this->session->userdata['customer'])){
 			$cus = $this->session->userdata('customer');
 			$data['booking'] = $this->Model_booking->Get_booking($cus);
@@ -44,7 +44,7 @@ class display extends CI_Controller {
 
 	public function Dashboard_eo()
 	{
-		if($this->session->userdata['logged_in'] != '1')
+		//if($this->session->userdata['logged_in'] != '1')
 		if(isset($this->session->userdata['eo'])){
 			$data['products'] = $this->Model_products->Get_products();
     		$this->load->view('eo/index', $data);
