@@ -27,13 +27,19 @@ class user extends CI_Controller {
 			if($this->input->post('user')=='Customer'){
 				$data = array(
 				'C_username' => $this->input->post('form-username'),
-				'C_password' => $this->input->post('form-password'),
+				'C_password' => md5($this->input->post('form-password')),
 				'C_email' => $this->input->post('form-email'),
 				'C_nama' => $this->input->post('form-name'),
 				);
 
-				$data = $this->security->xss_clean($data);
-				$result = $this->Login_Database->Registration_insertcus($data);
+				//$data = $this->security->xss_clean($data);
+				if ($this->security->xss_clean($data, TRUE) === FALSE)
+				{
+				      $this->load->view('user/login');  
+				}
+
+				else
+					$result = $this->Login_Database->Registration_insertcus($data);
 
 				if($result == false){
 				$data = array(
@@ -51,13 +57,20 @@ class user extends CI_Controller {
 			elseif($this->input->post('user')=='EO'){
 				$data = array(
 				'E_username' => $this->input->post('form-username'),
-				'E_password' => $this->input->post('form-password'),
+				'E_password' => md5($this->input->post('form-password')),
 				'E_email' => $this->input->post('form-email'),
 				'E_nama' => $this->input->post('form-name'),
 				);
 
-				$data = $this->security->xss_clean($data);
-				$result = $this->Login_Database->Registration_inserteo($data);
+				//$data = $this->security->xss_clean($data);
+
+				if ($this->security->xss_clean($data, TRUE) === FALSE)
+				{
+				      $this->load->view('user/login');  
+				}
+				
+				else
+					$result = $this->Login_Database->Registration_inserteo($data);
 
 				if($result == false){
 				$data = array(
@@ -95,7 +108,7 @@ class user extends CI_Controller {
 		else {
 			$data = array(
 				"username" => $this->input->post('form-username'),
-				"password" => $this->input->post('form-password')
+				"password" => md5($this->input->post('form-password'))
 			);
 			
 			if($this->input->post('user')=='Customer')
@@ -115,12 +128,13 @@ class user extends CI_Controller {
 					$session_data = $data['username'];
 					if($this->input->post('user')=='Customer'){
 						$this->session->set_userdata('customer', $session_data);
+						redirect('display/Dashboard_cus');
 					}
 					else{ 
 						$this->session->set_userdata('eo', $session_data);
+						redirect('display/Dashboard_eo');
 					}
 				}
-				redirect('display/Dashboard_eo');
 			}
 		}
 	}

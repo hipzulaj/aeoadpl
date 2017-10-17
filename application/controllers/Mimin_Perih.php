@@ -27,7 +27,7 @@ class Mimin_perih extends CI_Controller {
 		else {
 			$data = array(
 				"username" => $this->input->post('u'),
-				"password" => $this->input->post('p')
+				"password" => md5($this->input->post('p'))
 			);
 			
 			$result = $this->Login_Database->login_admin($data);

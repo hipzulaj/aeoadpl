@@ -10,7 +10,7 @@ class customer extends CI_Controller {
 	}
 
 	public function booking(){
-		if(isset($this->session->userdata['customer'])){
+		//if(isset($this->session->userdata['customer'])){
     		$book_data = array(
 			'cus_name' => $this->input->post('user'),
 			'produk' => $this->input->post('name'),
@@ -19,9 +19,9 @@ class customer extends CI_Controller {
 			);
 			$this->Model_booking->book($book_data);
 				redirect('display/Dashboard_cus');
-		}
-		else
-			redirect('display/login');
+		//}
+		//else
+			//redirect('display/login');
 	}
 
 	public function Cancel_booking($id){
