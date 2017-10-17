@@ -2,6 +2,7 @@
 Class Login_Database extends CI_Model{
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public function Registration_insertcus($data){
 		$condition = "C_username =" . "'" . $data['C_username'] . "' AND " . "C_email =" . "'" .$data['C_email']."'";
 		$this->db->select('*');
@@ -54,6 +55,10 @@ Class Login_Database extends CI_Model{
 	public function login_customer($data){
 		
 		$condition = "C_username =" ."'" . $data['username']. "' AND " . "C_password =" ."'" .$data['password']."'";
+=======
+public function Registration_insertcus($data){
+		$condition = "C_username =" . "'" . $data['C_username'] . "' AND " . "C_email =" . "'" .$data['C_email']."'";
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 =======
 public function Registration_insertcus($data){
 		$condition = "C_username =" . "'" . $data['C_username'] . "' AND " . "C_email =" . "'" .$data['C_email']."'";

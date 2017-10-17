@@ -18,7 +18,10 @@ class user extends CI_Controller {
 		$this->form_validation->set_rules('form-username', 'Username', 'required');
 		$this->form_validation->set_rules('form-password', 'Password', 'required');
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->form_validation->set_rules('user', 'User', 'required');
+=======
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 =======
 >>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 
@@ -27,8 +30,11 @@ class user extends CI_Controller {
 		} 
 		else{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if($this->input->post('user')=='Customer'){
 =======
+=======
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 			if($this->input->post('user')==''){
 				$result = "";
 				$data = array(
@@ -36,6 +42,9 @@ class user extends CI_Controller {
 				$this->load->view('user/login', $data);
 			}
 			else if($this->input->post('user')=='Customer'){
+<<<<<<< HEAD
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
+=======
 >>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 				$data = array(
 				'C_username' => $this->input->post('form-username'),
@@ -47,8 +56,14 @@ class user extends CI_Controller {
 				$session_data = $data['C_username'];
 						$this->session->set_userdata('customer', $session_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 			elseif($this->input->post('user')=='EO'){
+=======
+						redirect('display/index');
+			}
+			else if($this->input->post('user')=='EO'){
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 =======
 						redirect('display/index');
 			}
@@ -64,8 +79,14 @@ class user extends CI_Controller {
 				$session_data = $data['E_username'];
 						$this->session->set_userdata('eo', $session_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 			$this->load->view('index');
+=======
+						redirect('display/index');
+			}
+			else $this->load->view('salah');
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 =======
 						redirect('display/index');
 			}
@@ -80,6 +101,7 @@ class user extends CI_Controller {
 		$this->form_validation->set_rules('form-username', 'Username', 'required');
 		$this->form_validation->set_rules('form-password', 'Password', 'required');
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->form_validation->set_rules('user', 'User', 'required');
 		
 		if($this->form_validation->run() == false){
@@ -92,12 +114,18 @@ class user extends CI_Controller {
 			else{
 =======
 		if($this->form_validation->run() == false){
+=======
+		if($this->form_validation->run() == false){
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 			
 			if(isset($this->session->userdata['customer']))
 				redirect('display/Dashboard_cus');
 			else if (isset($this->session->userdata['eo']))
 				redirect('display/Dashboard_eo');
 			else
+<<<<<<< HEAD
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
+=======
 >>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 				$this->load->view('user/login');
 		}
@@ -125,6 +153,7 @@ class user extends CI_Controller {
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if($result == false){
 				$data = array(
 					'error_message' => 'Invalid Username or Password');
@@ -133,6 +162,9 @@ class user extends CI_Controller {
 				$this->load->view('user/login');
 
 			else if ($result == true){
+=======
+			if ($result == true){
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 =======
 			if ($result == true){
 >>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
@@ -150,6 +182,14 @@ class user extends CI_Controller {
 				redirect('display/Dashboard_eo');
 			}
 <<<<<<< HEAD
+=======
+			else {
+				$data = array(
+					'error_message' => 'Invalid Username or Password');
+				$this->load->view('user/login', $data);
+			}
+<<<<<<< HEAD
+>>>>>>> 4b77225bdb79aaadb6eb4c913f8ab2d89404e7af
 =======
 			else {
 				$data = array(
