@@ -32,6 +32,12 @@ class display_test extends TestCase
 		$output = $this->request('GET', 'Mimin_perih/login');
 		$this->assertContains('<title>SB Admin - Start Bootstrap Template</title>', $output);
 	}
+        
+         public function test_display_logout()
+	{
+		$output = $this->request('GET', 'Mimin_perih/logout');
+		$this->assertContains('<title>Admin Login Form</title>', $output);
+	}
 
 	public function test_display_login_mimin()
 	{
