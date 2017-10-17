@@ -60,6 +60,14 @@
 	                        		<div class="form-top-left">
 	                        			<h3>Login to our site</h3>
 	                            		<p>Enter username and password to log on:</p>
+                                    <?php
+                                    echo "<div class='error_msg'>";
+                                    if (isset($error_message)) {
+                                        echo $error_message;
+                                        }
+                                    echo validation_errors();
+                                    echo "</div>";
+                                    ?>
 	                        		</div>
 	                        		<div class="form-top-right">
 	                        			<i class="fa fa-key"></i>
