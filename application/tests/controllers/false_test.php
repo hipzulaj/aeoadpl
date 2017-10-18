@@ -10,6 +10,7 @@
 
 class false_test extends TestCase
 {
+
 	public function setUp()
     {
         $this->resetInstance();
@@ -22,28 +23,14 @@ class false_test extends TestCase
 			'/Mimin_perih/login',
 				[
 					'u' => 'admin',
-					'p' => '123'
+					'p' => '12'
 				]
 		);
 		$output = $this->request('GET', 'Mimin_perih/login');
 		$this->assertContains('<title>Admin Login Form</title>', $output);
 	}
 
-		public function test_false_login_non_admin()
-	{
-		$this->request(
-			'POST',
-			'/Mimin_perih/login',
-				[
-					'u' => 'false',
-					'p' => '123'
-				]
-		);
-		$output = $this->request('GET', 'Mimin_perih/login');
-		$this->assertContains('<title>Admin Login Form</title>', $output);
-	}
-
-	public function test_null_login_admin()
+	/* public function test_null_login_admin()
 	{
 		$this->request(
 			'POST',
@@ -55,7 +42,7 @@ class false_test extends TestCase
 		);
 		$output = $this->request('GET', 'Mimin_perih/login');
 		$this->assertContains('<title>Admin Login Form</title>', $output);
-	}
+	} */
 
 	public function test_false_login_cus(){
 		$this->request(
@@ -63,7 +50,7 @@ class false_test extends TestCase
 			'/user/login',
 				[
 					'form-username' => 'customer',
-					'form-password' => '123',
+					'form-password' => '12',
 					'user' => 'Customer'
 				]
 		);
@@ -91,7 +78,7 @@ class false_test extends TestCase
 			'/user/login',
 				[
 					'form-username' => 'eo',
-					'form-password' => '123',
+					'form-password' => '12',
 					'user' => 'EO'
 				]
 		);
@@ -118,8 +105,8 @@ class false_test extends TestCase
 			'POST',
 			'/user/login',
 				[
-					'form-username' => 'false',
-					'form-password' => '123',
+					'form-username' => '',
+					'form-password' => '',
 					'user' => ''
 				]
 		);
@@ -138,40 +125,6 @@ class false_test extends TestCase
 					'form-username' => '',
 					'form-password' => '',
 					'user' => 'Customer'
-				]
-		);
-		$output = $this->request('GET', 'user/login');
-		$this->assertContains('<title>Login &amp; Register </title>', $output);
-	}
-
-	public function test_register_cus_sv()
-	{	
-		$this->request(
-			'POST',
-			'user/register',
-				[
-					'form-name' => 'cus',
-					'form-email' => '123',
-					'form-username' => 'customer',
-					'form-password' => '123',
-					'user' => 'Customer'
-				]
-		);
-		$output = $this->request('GET', 'user/login');
-		$this->assertContains('<title>Login &amp; Register </title>', $output);
-	}
-
-	public function test_register_eo_sv()
-	{	
-		$this->request(
-			'POST',
-			'user/register',
-				[
-					'form-name' => 'eo',
-					'form-email' => 'eo',
-					'form-username' => 'eo',
-					'form-password' => '123',
-					'user' => 'EO'
 				]
 		);
 		$output = $this->request('GET', 'user/login');

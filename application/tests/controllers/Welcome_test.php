@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class display_test extends TestCase
+class welcome_test extends TestCase
 {
 
 	public function setUp()
@@ -64,19 +64,15 @@ class display_test extends TestCase
 	}
          public function test_display_Tambah_produk()
 	{
-		$output = $this->request('GET', 'eo/Tambah_produk');
-		$this->assertContains('<a href="cards.html">Cards</a>', $output);
+		$output = $this->request('GET', 'eo/Tambah_produk_form');
+		$this->assertContains('<title> Profile </title>', $output);
 	}
          public function test_display_Edit_produk()
 	{
 		$output = $this->request('GET', 'eo/Edit_produk');
 		$this->assertContains('<a href="navbar.html">Navbar</a>', $output);
 	}
-//         public function test_display_Tambah_produk1()
-//	{
-//		$output = $this->request('GET', 'eo/Tambah_produk');
-//		$this->assertContains('<li class="breadcrumb-item active">List Produk</li>', $output);
-//	}
+
          public function test_display_register()
 	{
 		$output = $this->request('GET', 'user/register');
@@ -97,56 +93,103 @@ class display_test extends TestCase
 		$output = $this->request('GET', 'display/Dashboard_eo');
 		$this->assertContains('<i class="fa fa-fw fa-dashboard"></i>', $output);
 	}
-  
-         
-
-        
-        
-//	public function test_login()
-//	{
-//		//$this->assertFalse( isset($_SESSION['admin']) );
-//		$this->request(
-//			'POST',
-//			'Mimin_perih/login',
-//				[
-//					'u' => 'admin',
-//					'p' => '1234',
-//				]
-//		);
-//		$this->assertEquals('admin', $_SESSION['admin']);
-//	}
 
 	public function test_display_dashboard()
 	{
-		$this->request('GET', 'display/Dashboard');
-		//$this->assertEquals('<title>SB Admin - Start Bootstrap Template</title>', $output);
+		//$_SESSION['admin'] = 'admin';
+		$output = $this->request('GET', 'display/Dashboard');
+		$this->assertEquals('<title>SB Admin - Start Bootstrap Template</title>', $output);
 	}
 	
-//	public function test_Logout(){
-//		$_SESSION['admin'] = 'admin';
-//		$this->assertEquals('admin', $_SESSION['admin']);
-//		$this->request('GET', 'Mimin_perih/logout');
-//        $this->assertNull( $_SESSION['admin'] );
-//    }
+		public function test_login()
+	{
+		$this->request(
+			'POST',
+			'Mimin_perih/login',
+				[
+					'u' => 'admin',
+					'p' => '1234',
+				]
+		);
+		$this->assertEquals('admin', $_SESSION['admin']);
+	}
 
-//	public function test_register_cus()
-//	{	
-//		$this->request(
-//			'POST',
-//			'user/register',
-//				[
-//					'form-name' => 'testcus',
-//					'form-email' => 'testcus@gmail.com',
-//					'form-username' => 'testcus',
-//					'form-password' => '123',
-//					'user' => 'Customer'
-//				]
-//		);
-//		$output = $this->request('GET', 'display/index');
-//		$this->assertContains('Hi! testcus', $output);
-//	}
+	public function test_Logout(){
+		$_SESSION['admin'] = 'admin';
+		$this->assertEquals('admin', $_SESSION['admin']);
+		$output = $this->request('GET', 'Mimin_perih/logout');
+       	$this->assertContains('<title>Admin Login Form</title>', $output);
+   }
+
+	public function test_register_cus()
+	{	
+		$this->request(
+			'POST',
+			'user/register',
+				[
+					'form-name' => 'testcus',
+					'form-email' => 'testcus@gmail.com',
+					'form-username' => 'testcus',
+					'form-password' => '123',
+					'user' => 'Customer'
+				]
+		);
+		$output = $this->request('GET', 'display/index');
+		$this->assertContains('<title>AEO</title>', $output);
+	}
+
+	public function test_register_cus_same()
+	{	
+		$this->request(
+			'POST',
+			'user/register',
+				[
+					'form-name' => 'testcus',
+					'form-email' => 'testcus@gmail.com',
+					'form-username' => 'testcus',
+					'form-password' => '123',
+					'user' => 'Customer'
+				]
+		);
+		$output = $this->request('GET', 'display/index');
+		$this->assertContains('<title>AEO</title>', $output);
+	}
+
+	public function test_register_cus_xss()
+	{	
+		$this->request(
+			'POST',
+			'user/register',
+				[
+					'form-name' => 'testcus',
+					'form-email' => 'testcus@gmail.com',
+					'form-username' => '<script>testcus</script>',
+					'form-password' => '123',
+					'user' => 'Customer'
+				]
+		);
+		$output = $this->request('GET', 'display/index');
+		$this->assertContains('<title>AEO</title>', $output);
+	}
 
 	public function test_register_eo()
+	{	
+		$this->request(
+			'POST',
+			'user/register',
+				[
+					'form-name' => 'testeo',
+					'form-email' => 'testeo@gmail.com',
+					'form-username' => 'testeo',
+					'form-password' => '123',
+					'user' => 'EO'
+				]
+		);
+		$output = $this->request('GET', 'display/index');
+		$this->assertContains('<title>AEO</title>', $output);
+	}
+
+	public function test_register_eo_same()
 	{	
 		$this->request(
 			'POST',
