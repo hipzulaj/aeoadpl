@@ -21,7 +21,7 @@ class eo extends CI_Controller {
 	}
 
 	public function Tambah_produk_form(){
-		if(isset($this->session->userdata['eo'])){
+		if($this->session->has_userdata('eo')){
     		$this->load->view('eo/Tambah_produk_form');
 		}
 		else
@@ -50,9 +50,7 @@ class eo extends CI_Controller {
 				'jenis' => set_value('jenis'), 
 				);
 			$this->Model_products->Add_products($data_products);
-			redirect('display/Dashboard_eo');
-		}
-	}
+			redirect('display/Dashboard_eo');}}
 
 	public function Edit_produk($id){
 
@@ -85,6 +83,5 @@ class eo extends CI_Controller {
 
 	public function Hapus_produk($id){
 		$this->Model_products->Delete_products($id);
-		redirect('display/Dashboard_eo');
-	}
+		redirect('display/Dashboard_eo');}
 }

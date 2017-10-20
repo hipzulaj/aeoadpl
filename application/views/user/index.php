@@ -128,7 +128,7 @@
                   <td><?=$book->produk?></td>
                   <td><?=$book->jenis?></td>
                   <td><?=$book->biaya?></td>
-                  <td><?=anchor('#','Cancel Booking',['class'=>'btn btn-danger btn-sm','data-toggle'=>'modal','data-target'=>'#DeleteModal'])?></td>
+                  <td><?=anchor('customer/Cancel_booking/' . $book->id,'Cancel Booking',['class'=>'btn btn-danger btn-sm','onclick'=>'return confirm(\'Apakah Anda Yakin?\')'])?></td>
                 </tr>
                 <?php endforeach; ?>
               </tbody>

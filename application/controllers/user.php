@@ -14,92 +14,81 @@ class user extends CI_Controller {
 
 
 	public function register(){
-		$this->form_validation->set_rules('form-name', 'Name', 'required');
-		$this->form_validation->set_rules('form-email', 'Email', 'required');
-		$this->form_validation->set_rules('form-username', 'Username', 'required');
-		$this->form_validation->set_rules('form-password', 'Password', 'required');
-		$this->form_validation->set_rules('user', 'User', 'required');
+		$this->form_validation->set_rules('form-name', 'Name', 'trim|required');
+		$this->form_validation->set_rules('form-email', 'Email', 'trim|required|valid_email');
+		$this->form_validation->set_rules('form-username', 'Username', 'trim|required');
+		$this->form_validation->set_rules('form-password', 'Password', 'trim|required');
+		$this->form_validation->set_rules('user', 'User', 'trim|required');
 
 		if($this->form_validation->run() == FALSE){
-			$this->load->view('user/login');
+			if($this->session->has_userdata('customer')){
+				redirect('dashboard_cus');}
+
+			elseif ($this->session->has_userdata('eo')){
+				redirect('dashboard_eo');}
+			else{
+				$this->load->view('user/login');
+			}
 		} 
 		else{
 			if($this->input->post('user')=='Customer'){
 				$data = array(
-				'C_username' => $this->input->post('form-username'),
-				'C_password' => md5($this->input->post('form-password')),
-				'C_email' => $this->input->post('form-email'),
-				'C_nama' => $this->input->post('form-name'),
+					'C_username' => $this->input->post('form-username'),
+					'C_password' => md5($this->input->post('form-password')),
+					'C_email' => $this->input->post('form-email'),
+					'C_nama' => $this->input->post('form-name'),
 				);
 
-				//$data = $this->security->xss_clean($data);
-				if ($this->security->xss_clean($data, TRUE) === FALSE)
-				{
-				      $this->load->view('user/login');  
-				}
-
-				else
-					$result = $this->Login_Database->Registration_insertcus($data);
+				$result = $this->Login_Database->Registration_insertcus($data);
 
 				if($result == false){
-				$data = array(
-					'error_regist' => 'Username or Email Already Registered');
-				$this->load->view('user/login', $data);
-				}
+					$data = array(
+						'error_regist' => 'Username or Email Already Registered');
+					$this->load->view('user/login', $data);
+					}
 
 				else{
-				$session_data = $data['C_username'];
-				$this->session->set_userdata('customer', $session_data);
-				redirect('display/index');
-				}
+					$session_data = $data['C_username'];
+					$this->session->set_userdata('customer', $session_data);
+					redirect('display/index');}
 			}
 
 			elseif($this->input->post('user')=='EO'){
 				$data = array(
-				'E_username' => $this->input->post('form-username'),
-				'E_password' => md5($this->input->post('form-password')),
-				'E_email' => $this->input->post('form-email'),
-				'E_nama' => $this->input->post('form-name'),
+					'E_username' => $this->input->post('form-username'),
+					'E_password' => md5($this->input->post('form-password')),
+					'E_email' => $this->input->post('form-email'),
+					'E_nama' => $this->input->post('form-name'),
 				);
-
-				//$data = $this->security->xss_clean($data);
-
-				if ($this->security->xss_clean($data, TRUE) === FALSE)
-				{
-				      $this->load->view('user/login');  
-				}
-				
-				else
-					$result = $this->Login_Database->Registration_inserteo($data);
+				$result = $this->Login_Database->Registration_inserteo($data);
 
 				if($result == false){
-				$data = array(
-					'error_regist' => 'Username or Email Already Registered');
-				$this->load->view('user/login', $data);
-				} 
+					$data = array(
+						'error_regist' => 'Username or Email Already Registered');
+					$this->load->view('user/login', $data);
+					} 
+
 				else{
 					$session_data = $data['E_username'];
 					$this->session->set_userdata('eo', $session_data);
-					redirect('display/index');
+					redirect('display/index');}
 				}
 			}
 		}
-	}
 
 
 	public function login()
 	{
-		$this->form_validation->set_rules('form-username', 'Username', 'required');
-		$this->form_validation->set_rules('form-password', 'Password', 'required');
-		$this->form_validation->set_rules('user', 'User', 'required');
+		$this->form_validation->set_rules('username-login', 'Username', 'trim|required');
+		$this->form_validation->set_rules('password-login', 'Password', 'trim|required');
+		$this->form_validation->set_rules('user', 'User', 'trim|required');
 		
 		if($this->form_validation->run() == false){
-			if(isset($this->session->userdata['customer'])){
-				$this->load->view('dashboard_cus');
-			}
-			elseif (isset($this->session->userdata['eo'])){
-				$this->load->view('dashboard_eo');
-			}
+			if($this->session->has_userdata('customer')){
+				redirect('dashboard_cus');}
+
+			elseif ($this->session->has_userdata('eo')){
+				redirect('dashboard_eo');}
 			else{
 				$this->load->view('user/login');
 			}
@@ -107,39 +96,36 @@ class user extends CI_Controller {
 
 		else {
 			$data = array(
-				"username" => $this->input->post('form-username'),
-				"password" => md5($this->input->post('form-password'))
+				"username" => $this->input->post('username-login'),
+				"password" => md5($this->input->post('password-login'))
 			);
 			
-			if($this->input->post('user')=='Customer')
+			if($this->input->post('user')=='Customer'){
 				$result = $this->Login_Database->login_customer($data);
-			elseif($this->input->post('user')=='EO')
+			}
+			elseif($this->input->post('user')=='EO'){
 				$result = $this->Login_Database->login_eo($data);
+			}
 
 			if($result == false){
 				$data = array(
 					'error_message' => 'Invalid Username or Password');
 				$this->load->view('user/login', $data);
-			} 
-				//$this->load->view('user/login');
+			}
 
 			else if ($result == true){
-				if ($result != false) {
-					$session_data = $data['username'];
-					if($this->input->post('user')=='Customer'){
-						$this->session->set_userdata('customer', $session_data);
-						redirect('display/Dashboard_cus');
-					}
-					else{ 
-						$this->session->set_userdata('eo', $session_data);
-						redirect('display/Dashboard_eo');
-					}
-				}
-			}
-		}
-	}
+				$session_data = $data['username'];
+				if($this->input->post('user')=='Customer'){
+					$this->session->set_userdata('customer', $session_data);
+					redirect('display/Dashboard_cus');}
+				else{ 
+					$this->session->set_userdata('eo', $session_data);
+					redirect('display/Dashboard_eo');
+				}}}}
 
 	function logout(){
+		$this->session->unset_userdata('customer');
+		$this->session->unset_userdata('eo');
 		$this->session->sess_destroy();
 		$this->load->view('user/login');;
 	}

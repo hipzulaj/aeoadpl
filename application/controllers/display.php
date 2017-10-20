@@ -23,8 +23,7 @@ class display extends CI_Controller {
 
 	public function dashboard()
 	{
-		//if($this->session->userdata['admin'] != '1')
-		if(isset($this->session->userdata['admin']))
+		if($this->session->has_userdata('admin'))
     		$this->load->view('admin/index');
 		else
 			$this->load->view('login/login');
@@ -32,38 +31,34 @@ class display extends CI_Controller {
 
 	public function Dashboard_cus()
 	{
-		//if($this->session->userdata['logged_in'] != '1')
-		if(isset($this->session->userdata['customer'])){
+		if($this->session->has_userdata('customer')){
 			$cus = $this->session->userdata('customer');
 			$data['booking'] = $this->Model_booking->Get_booking($cus);
     		$this->load->view('user/index',$data);
     	}
 		else
-			$this->load->view('user/login');
-	}
+			redirect('user/login');}
 
 	public function Dashboard_eo()
 	{
-		//if($this->session->userdata['logged_in'] != '1')
-		if(isset($this->session->userdata['eo'])){
+		if($this->session->has_userdata('eo')){
 			$data['products'] = $this->Model_products->Get_products();
     		$this->load->view('eo/index', $data);
 		}
 		else
-			$this->load->view('user/login');
-	}
+			redirect('user/login');}
 
 	public function login_mimin(){
-		if(isset($this->session->userdata['admin']))
+		if($this->session->has_userdata('admin'))
 				$this->load->view('admin/index');
 			else
 				$this->load->view('login/login');
 	}
 
 	public function login(){
-		if(isset($this->session->userdata['customer']))
+		if($this->session->has_userdata('customer'))
 			redirect('display/Dashboard_cus');
-		else if(isset($this->session->userdata['eo']))
+		else if($this->session->has_userdata('eo'))
 			redirect('display/Dashboard_eo');
 		else
 			$this->load->view('user/login');

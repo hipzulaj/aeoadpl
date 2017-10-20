@@ -38,6 +38,7 @@ class FunctionPatcher extends AbstractPatcher
 		'function_exists',
 		'header',
 		'setcookie',
+		'redirect',
 		// Functions that have param called by reference
 		// Need to prepare method in FunctionPatcher\Proxy class
 		'openssl_random_pseudo_bytes',

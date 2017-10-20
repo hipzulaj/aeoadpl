@@ -76,12 +76,12 @@
 	                            <div class="form-bottom">
 				                    <form role="form" action="<?php echo site_url('user/login/')?>" method="post" class="login-form">
 				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-username">Username</label>
-				                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+				                    		<label class="sr-only" for="username-login">Username</label>
+				                        	<input type="text" name="username-login" placeholder="Username..." class="form-username form-control" id="form-username">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+				                        	<label class="sr-only" for="password-login">Password</label>
+				                        	<input type="password" name="password-login" placeholder="Password..." class="form-password form-control" id="form-password">
 				                        </div>
                                         <input type="radio" name="user" value="EO">I'm EO &nbsp;
                                         <input type="radio" name="user" value="Customer">I'm Customer

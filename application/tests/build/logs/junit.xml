@@ -1,34 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="25" assertions="26" failures="0" errors="0" time="4.747959">
-    <testsuite name="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" fullPackage="display" tests="14" assertions="15" failures="0" errors="0" time="2.810375">
-      <testcase name="test_display_index" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.400379"/>
-      <testcase name="test_display_login" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.132353"/>
-      <testcase name="test_display_login_mimin" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="31" assertions="1" time="0.097828"/>
-      <testcase name="test_display_categorize" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="37" assertions="1" time="0.214935"/>
-      <testcase name="test_login" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="43" assertions="1" time="0.685039"/>
-      <testcase name="test_Login_eo" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="63" assertions="1" time="0.231121"/>
-      <testcase name="test_session_eo" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="78" assertions="0" time="0.155333"/>
-      <testcase name="test_Login_cus" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="83" assertions="1" time="0.116627"/>
-      <testcase name="test_Dashboard_cus" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="98" assertions="1" time="0.096607"/>
-      <testcase name="test_Logout" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="106" assertions="3" time="0.170546"/>
-      <testcase name="test_register_cus" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="121" assertions="1" time="0.175465"/>
-      <testcase name="test_register_eo" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="138" assertions="1" time="0.175444"/>
-      <testcase name="test_method_404" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="155" assertions="1" time="0.109060"/>
-      <testcase name="test_APPPATH" class="display_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="161" assertions="1" time="0.049639"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="36" assertions="36" failures="0" errors="0" time="4.622722">
+    <testsuite name="Mimin_perih_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Mimin_perih_test.php" fullPackage="Mimin.perih" tests="5" assertions="5" failures="0" errors="0" time="0.673711">
+      <testcase name="test_login_admin" class="Mimin_perih_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Mimin_perih_test.php" line="20" assertions="1" time="0.197814"/>
+      <testcase name="test_false_login_admin" class="Mimin_perih_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Mimin_perih_test.php" line="33" assertions="1" time="0.127851"/>
+      <testcase name="test_null_login_admin" class="Mimin_perih_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Mimin_perih_test.php" line="46" assertions="1" time="0.118974"/>
+      <testcase name="test_login_admin_logged" class="Mimin_perih_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Mimin_perih_test.php" line="59" assertions="1" time="0.118464"/>
+      <testcase name="test_logout" class="Mimin_perih_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Mimin_perih_test.php" line="66" assertions="1" time="0.110608"/>
     </testsuite>
-    <testsuite name="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" fullPackage="false" tests="11" assertions="11" failures="0" errors="0" time="1.937583">
-      <testcase name="test_false_login_admin" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="18" assertions="1" time="0.170626"/>
-      <testcase name="test_false_login_non_admin" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="32" assertions="1" time="0.162200"/>
-      <testcase name="test_null_login_admin" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="46" assertions="1" time="0.165900"/>
-      <testcase name="test_false_login_cus" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="60" assertions="1" time="0.167182"/>
-      <testcase name="test_false_login_non_cus" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="74" assertions="1" time="0.174075"/>
-      <testcase name="test_false_login_eo" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="88" assertions="1" time="0.176926"/>
-      <testcase name="test_false_login_non_eo" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="102" assertions="1" time="0.203941"/>
-      <testcase name="test_null_login" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="116" assertions="1" time="0.165828"/>
-      <testcase name="test_register_null" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="130" assertions="1" time="0.168297"/>
-      <testcase name="test_register_cus_sv" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="147" assertions="1" time="0.179502"/>
-      <testcase name="test_register_eo_sv" class="false_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\false_test.php" line="164" assertions="1" time="0.203106"/>
+    <testsuite name="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" fullPackage="welcome" tests="13" assertions="13" failures="0" errors="0" time="1.408180">
+      <testcase name="test_display_index" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.113388"/>
+      <testcase name="test_display_login" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.107908"/>
+      <testcase name="test_display_login_mimin" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="31" assertions="1" time="0.099020"/>
+      <testcase name="test_display_login_mimin_login" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="37" assertions="1" time="0.104398"/>
+      <testcase name="test_display_categorize" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="43" assertions="1" time="0.126632"/>
+      <testcase name="test_display_Tambah_produk" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="49" assertions="1" time="0.117120"/>
+      <testcase name="test_display_Tambah_produk_nologin" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="59" assertions="1" time="0.105436"/>
+      <testcase name="test_display_Dashboard_cus" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="64" assertions="1" time="0.120026"/>
+      <testcase name="test_display_Dashboard_cus_nologin" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="71" assertions="1" time="0.092732"/>
+      <testcase name="test_display_Dashboard_eo" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="77" assertions="1" time="0.118096"/>
+      <testcase name="test_display_Dashboard_eo_nologin" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="84" assertions="1" time="0.094585"/>
+      <testcase name="test_display_dashboard" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="90" assertions="1" time="0.108535"/>
+      <testcase name="test_display_dashboard_nologin" class="welcome_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\Welcome_test.php" line="97" assertions="1" time="0.100304"/>
+    </testsuite>
+    <testsuite name="login_customer_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_customer_test.php" fullPackage="login.customer" tests="6" assertions="6" failures="0" errors="0" time="0.776430">
+      <testcase name="test_login_customer" class="login_customer_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_customer_test.php" line="21" assertions="1" time="0.143458"/>
+      <testcase name="test_false_login_cus" class="login_customer_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_customer_test.php" line="35" assertions="1" time="0.143569"/>
+      <testcase name="test_wrong_pass_cus" class="login_customer_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_customer_test.php" line="49" assertions="1" time="0.141104"/>
+      <testcase name="test_null_login_cus" class="login_customer_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_customer_test.php" line="63" assertions="1" time="0.127673"/>
+      <testcase name="test_login_cus_logged" class="login_customer_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_customer_test.php" line="77" assertions="1" time="0.109980"/>
+      <testcase name="test_customer_logout" class="login_customer_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_customer_test.php" line="87" assertions="1" time="0.110646"/>
+    </testsuite>
+    <testsuite name="login_eo_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_eo_test.php" fullPackage="login.eo" tests="6" assertions="6" failures="0" errors="0" time="0.828312">
+      <testcase name="test_login_eo" class="login_eo_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_eo_test.php" line="21" assertions="1" time="0.141552"/>
+      <testcase name="test_false_login_eo" class="login_eo_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_eo_test.php" line="35" assertions="1" time="0.147052"/>
+      <testcase name="test_wrong_pass_eo" class="login_eo_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_eo_test.php" line="49" assertions="1" time="0.146567"/>
+      <testcase name="test_null_login_eo" class="login_eo_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_eo_test.php" line="63" assertions="1" time="0.127681"/>
+      <testcase name="test_login_eo_logged" class="login_eo_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_eo_test.php" line="77" assertions="1" time="0.114100"/>
+      <testcase name="test_eo_logout" class="login_eo_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\login_eo_test.php" line="87" assertions="1" time="0.151360"/>
+    </testsuite>
+    <testsuite name="user_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\user_test.php" fullPackage="user" tests="6" assertions="6" failures="0" errors="0" time="0.936089">
+      <testcase name="test_register_cus_sv" class="user_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\user_test.php" line="19" assertions="1" time="0.258661"/>
+      <testcase name="test_register_cus_logged" class="user_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\user_test.php" line="35" assertions="1" time="0.122690"/>
+      <testcase name="test_null_register_cus" class="user_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\user_test.php" line="42" assertions="1" time="0.140717"/>
+      <testcase name="test_register_eo_sv" class="user_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\user_test.php" line="60" assertions="1" time="0.158022"/>
+      <testcase name="test_register_eo_logged" class="user_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\user_test.php" line="76" assertions="1" time="0.112087"/>
+      <testcase name="test_null_register_eo" class="user_test" file="C:\xampp\htdocs\ADPL\application\tests\controllers\user_test.php" line="83" assertions="1" time="0.143912"/>
     </testsuite>
   </testsuite>
 </testsuites>

@@ -11,215 +11,150 @@
 class welcome_test extends TestCase
 {
 
-	public function setUp()
-    {
+	public function setUp(){
+
         $this->resetInstance();
     }
 
-	public function test_display_index()
-	{
+	public function test_display_index(){
+
 		$output = $this->request('GET', 'display/index');
 		$this->assertContains('<title>AEO</title>', $output);
 	}
 
-	public function test_display_login()
-	{
+	public function test_display_login(){
+
 		$output = $this->request('GET', 'display/login');
 		$this->assertContains('<title>Login &amp; Register </title>', $output);
 	}
-        public function test_display_login1()
-	{
-		$output = $this->request('GET', 'Mimin_perih/login');
-		$this->assertContains('<title>SB Admin - Start Bootstrap Template</title>', $output);
-	}
-        
-         public function test_display_logout()
-	{
-		$output = $this->request('GET', 'Mimin_perih/logout');
-		$this->assertContains('<title>Admin Login Form</title>', $output);
-	}
 
-	public function test_display_login_mimin()
-	{
+	public function test_display_login_mimin(){
+
 		$output = $this->request('GET', 'display/login_mimin');
 		$this->assertContains('<title>Admin Login Form</title>', $output);
 	}
 
-	public function test_display_categorize()
-	{
+	public function test_display_login_mimin_login(){
+
+		$output = $this->request('GET', 'display/login_mimin');
+		$this->assertContains('<title>Admin Login Form</title>', $output);
+	}
+
+	public function test_display_categorize(){
+
 		$output = $this->request('GET', 'display/categorize');
 		$this->assertContains('<title>AEO</title>', $output);
 	}
-        public function test_display_Tambah_produk_form()
-	{
+
+    public function test_display_Tambah_produk(){	
+
+		$_SESSION['eo'] = 'eo';
 		$output = $this->request('GET', 'eo/Tambah_produk_form');
-		$this->assertContains('<title>Tambah_produk_form </title>', $output);
-	}
-        
-        
-         public function test_display_Transaksi_booking()
-	{
-		$output = $this->request('GET', 'eo/Transaksi_booking');
-		$this->assertContains('<a href="#">Third Level Item</a>', $output);
-	}
-         public function test_display_Tambah_produk()
-	{
-		$output = $this->request('GET', 'eo/Tambah_produk_form');
-		$this->assertContains('<title> Profile </title>', $output);
-	}
-         public function test_display_Edit_produk()
-	{
-		$output = $this->request('GET', 'eo/Edit_produk');
-		$this->assertContains('<a href="navbar.html">Navbar</a>', $output);
+		$this->assertContains('<title>eo Profile </title>', $output);
 	}
 
-         public function test_display_register()
-	{
-		$output = $this->request('GET', 'user/register');
-		$this->assertContains('<label class="sr-only" for="form-password">Password</label>', $output);
+	 /**
+     * @covers eo::Tambah_produk_form
+     */
+	public function test_display_Tambah_produk_nologin(){
+		$output = $this->request('GET', 'eo/Tambah_produk_form');
+		$this->assertRedirect('display/login');
 	}
-         public function test_display_register1()
-	{
-		$output = $this->request('GET', 'user/register');
-		$this->assertContains('<label class="sr-only" for="form-username">Username</label>', $output);
-	}
-        public function test_display_Dashboard_cus()
-	{
+
+	public function test_display_Dashboard_cus(){
+
+		$_SESSION['customer'] = 'customer';
 		$output = $this->request('GET', 'display/Dashboard_cus');
-		$this->assertContains('<span class="nav-link-text">Charts</span>', $output);
+		$this->assertContains('<title>Customer Profile</title>', $output);
 	}
-        public function test_display_Dashboard_eo()
-	{
+
+	public function test_display_Dashboard_cus_nologin(){
+
+		$output = $this->request('GET', 'display/Dashboard_cus');
+		$this->assertRedirect('user/login');
+	}
+
+    public function test_display_Dashboard_eo(){
+
+		$_SESSION['eo'] = 'eo';
 		$output = $this->request('GET', 'display/Dashboard_eo');
 		$this->assertContains('<i class="fa fa-fw fa-dashboard"></i>', $output);
 	}
 
-	public function test_display_dashboard()
-	{
-		//$_SESSION['admin'] = 'admin';
-		$output = $this->request('GET', 'display/Dashboard');
-		$this->assertEquals('<title>SB Admin - Start Bootstrap Template</title>', $output);
-	}
-	
-		public function test_login()
-	{
-		$this->request(
-			'POST',
-			'Mimin_perih/login',
-				[
-					'u' => 'admin',
-					'p' => '1234',
-				]
-		);
-		$this->assertEquals('admin', $_SESSION['admin']);
+	public function test_display_Dashboard_eo_nologin(){
+
+		$output = $this->request('GET', 'display/Dashboard_eo');
+		$this->assertRedirect('user/login');
 	}
 
-	public function test_Logout(){
+	public function test_display_dashboard(){
+
 		$_SESSION['admin'] = 'admin';
-		$this->assertEquals('admin', $_SESSION['admin']);
-		$output = $this->request('GET', 'Mimin_perih/logout');
-       	$this->assertContains('<title>Admin Login Form</title>', $output);
-   }
-
-	public function test_register_cus()
-	{	
-		$this->request(
-			'POST',
-			'user/register',
-				[
-					'form-name' => 'testcus',
-					'form-email' => 'testcus@gmail.com',
-					'form-username' => 'testcus',
-					'form-password' => '123',
-					'user' => 'Customer'
-				]
-		);
-		$output = $this->request('GET', 'display/index');
-		$this->assertContains('<title>AEO</title>', $output);
+		$output = $this->request('GET', 'display/Dashboard');
+		$this->assertContains('<title>SB Admin - Start Bootstrap Template</title>', $output);
 	}
 
-	public function test_register_cus_same()
-	{	
-		$this->request(
-			'POST',
-			'user/register',
-				[
-					'form-name' => 'testcus',
-					'form-email' => 'testcus@gmail.com',
-					'form-username' => 'testcus',
-					'form-password' => '123',
-					'user' => 'Customer'
-				]
-		);
-		$output = $this->request('GET', 'display/index');
-		$this->assertContains('<title>AEO</title>', $output);
+	public function test_display_dashboard_nologin(){
+
+		$output = $this->request('GET', 'display/Dashboard');
+		$this->assertContains('<title>Admin Login Form</title>', $output);
 	}
 
-	public function test_register_cus_xss()
-	{	
-		$this->request(
-			'POST',
-			'user/register',
-				[
-					'form-name' => 'testcus',
-					'form-email' => 'testcus@gmail.com',
-					'form-username' => '<script>testcus</script>',
-					'form-password' => '123',
-					'user' => 'Customer'
-				]
-		);
-		$output = $this->request('GET', 'display/index');
-		$this->assertContains('<title>AEO</title>', $output);
-	}
+	// public function test_Logout(){
+	// 	$_SESSION['admin'] = 'admin';
+	// 	$this->assertEquals('admin', $_SESSION['admin']);
+	// 	$output = $this->request('GET', 'Mimin_perih/logout');
+ //       	$this->assertContains('<title>Admin Login Form</title>', $output);
+ //   }
 
-	public function test_register_eo()
-	{	
-		$this->request(
-			'POST',
-			'user/register',
-				[
-					'form-name' => 'testeo',
-					'form-email' => 'testeo@gmail.com',
-					'form-username' => 'testeo',
-					'form-password' => '123',
-					'user' => 'EO'
-				]
-		);
-		$output = $this->request('GET', 'display/index');
-		$this->assertContains('<title>AEO</title>', $output);
-	}
+	// public function test_register_eo()
+	// {	
+	// 	$this->request(
+	// 		'POST',
+	// 		'user/register',
+	// 			[
+	// 				'form-name' => 'testeo',
+	// 				'form-email' => 'testeo@gmail.com',
+	// 				'form-username' => 'testeo',
+	// 				'form-password' => '123',
+	// 				'user' => 'EO'
+	// 			]
+	// 	);
+	// 	$output = $this->request('GET', 'display/index');
+	// 	$this->assertContains('<title>AEO</title>', $output);
+	// }
 
-	public function test_register_eo_same()
-	{	
-		$this->request(
-			'POST',
-			'user/register',
-				[
-					'form-name' => 'testeo',
-					'form-email' => 'testeo@gmail.com',
-					'form-username' => 'testeo',
-					'form-password' => '123',
-					'user' => 'EO'
-				]
-		);
-		$output = $this->request('GET', 'display/index');
-		$this->assertContains('<title>AEO</title>', $output);
-	}
+	// public function test_register_eo_same()
+	// {	
+	// 	$this->request(
+	// 		'POST',
+	// 		'user/register',
+	// 			[
+	// 				'form-name' => 'testeo',
+	// 				'form-email' => 'testeo@gmail.com',
+	// 				'form-username' => 'testeo',
+	// 				'form-password' => '123',
+	// 				'user' => 'EO'
+	// 			]
+	// 	);
+	// 	$output = $this->request('GET', 'display/index');
+	// 	$this->assertContains('<title>AEO</title>', $output);
+	// }
 
-	public function test_method_404()
-	{
-		$this->request('GET', 'welcome/method_not_exist');
-		$this->assertResponseCode(404);
-	}
+	// public function test_method_404()
+	// {
+	// 	$this->request('GET', 'welcome/method_not_exist');
+	// 	$this->assertResponseCode(404);
+	// }
 
-	public function test_APPPATH()
-	{
-		$actual = realpath(APPPATH);
-		$expected = realpath(__DIR__ . '/../..');
-		$this->assertEquals(
-			$expected,
-			$actual,
-			'Your APPPATH seems to be wrong. Check your $application_folder in tests/Bootstrap.php'
-		);
-	}
+	// public function test_APPPATH()
+	// {
+	// 	$actual = realpath(APPPATH);
+	// 	$expected = realpath(__DIR__ . '/../..');
+	// 	$this->assertEquals(
+	// 		$expected,
+	// 		$actual,
+	// 		'Your APPPATH seems to be wrong. Check your $application_folder in tests/Bootstrap.php'
+	// 	);
+	// }
 }

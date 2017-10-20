@@ -8,59 +8,123 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 class user_test extends TestCase
-{	
-
-	public function setUp()
+{	 
+    public function setUp()
     {
         $this->resetInstance();
     }
 
-    public function test_Login_cus()
-	{
-		//$this->assertFalse( isset($_SESSION['customer']) );
-		$this->request(
+    //Register Customer
+
+    public function test_register_cus() //belom kelar
+	{	
+		$output = $this->request(
 			'POST',
-			'user/login',
+			'user/register',
 				[
-					'form-username' => 'customer',
+					'form-name' => 'testcus',
+					'form-email' => 'testcus@gmail.com',
+					'form-username' => 'testcus',
 					'form-password' => '123',
 					'user' => 'Customer'
 				]
 		);
-		$this->assertEquals('customer', $_SESSION['customer']);
+		$this->assertContains('<title>Login &amp; Register </title>', $output);
 	}
 
-    public function test_Dashboard_cus()
-	{
-		$_SESSION['customer'] = 'customer';
-		$this->request('GET', 'display/Dashboard_cus');
-		//$this->assertEquals('customer', $_SESSION['customer']);
-	}
-
-	public function test_booking()
-	{
-		$this->request(
+    public function test_register_cus_sv()
+	{	
+		$output = $this->request(
 			'POST',
-			'customer/booking',
+			'user/register',
 				[
-					'user' => 'customer',
-					'jenis' => 'birthday',
-					'name' => 'aaa',
-					'biaya' => '20000'
+					'form-name' => 'testcus',
+					'form-email' => 'testcus@gmail.com',
+					'form-username' => 'testcus',
+					'form-password' => '123',
+					'user' => 'Customer'
 				]
 		);
+		$this->assertContains('<title>Login &amp; Register </title>', $output);
 	}
 
-	public function test_cancel_booking()
+    public function test_register_cus_logged()
 	{	
-		//$this->assertFalse( isset($_SESSION['eo']) );
-		$this->request('GET','customer/Cancel_booking/10');
-		$this->assertRedirect('display/Dashboard_cus');
+		$_SESSION['customer'] = 'customer';
+		$this->request('GET', 'user/register');
+		$this->assertRedirect('dashboard_cus');
 	}
 
-	public function test_Logout(){
-		$_SESSION['customer'] = 'customer';
-		$output = $this->request('GET', 'user/logout');
-       	$this->assertContains('<title>Login &amp; Register </title>');
-    }   
+   	public function test_null_register_cus()
+	{	
+		$output = $this->request(
+			'POST',
+			'user/register',
+				[
+					'form-name' => '',
+					'form-email' => '',
+					'form-username' => '',
+					'form-password' => '',
+					'user' => 'Customer'
+				]
+		);
+		$this->assertContains('<title>Login &amp; Register </title>', $output);
+	}
+
+
+	//Register EO
+	public function test_register_eo() //belom kelar
+	{	
+		$output = $this->request(
+			'POST',
+			'user/register',
+				[
+					'form-name' => 'testcus',
+					'form-email' => 'testcus@gmail.com',
+					'form-username' => 'testcus',
+					'form-password' => '123',
+					'user' => 'Customer'
+				]
+		);
+		$this->assertContains('<title>Login &amp; Register </title>', $output);
+	}
+
+	public function test_register_eo_sv()
+	{	
+		$output = $this->request(
+			'POST',
+			'user/register',
+				[
+					'form-name' => 'testeo',
+					'form-email' => 'testeo@gmail.com',
+					'form-username' => 'testeo',
+					'form-password' => '123',
+					'user' => 'EO'
+				]
+		);
+		$this->assertContains('<title>Login &amp; Register </title>', $output);
+	}
+
+	public function test_register_eo_logged()
+	{	
+		$_SESSION['eo'] = 'eo';
+		$this->request('GET', 'user/register');
+		$this->assertRedirect('dashboard_eo');
+	}
+
+	public function test_null_register_eo()
+	{	
+		$output = $this->request(
+			'POST',
+			'user/register',
+				[
+					'form-name' => '',
+					'form-email' => '',
+					'form-username' => '',
+					'form-password' => '',
+					'user' => 'Customer'
+				]
+		);
+		$this->assertContains('<title>Login &amp; Register </title>', $output);
+	}
 }

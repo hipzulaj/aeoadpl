@@ -13,15 +13,16 @@ class Mimin_perih extends CI_Controller {
 
 	public function login()
 	{
-		$this->form_validation->set_rules('u', 'Username', 'required');
-		$this->form_validation->set_rules('p', 'Password', 'required');
+		$this->form_validation->set_rules('u', 'Username', 'trim|required');
+		$this->form_validation->set_rules('p', 'Password', 'trim|required');
 		if($this->form_validation->run() == false){
 			
-			if(isset($this->session->userdata['admin']))
+			if($this->session->has_userdata('admin')){
 				$this->load->view('admin/index');
-
-			else
+			}
+			else{
 				$this->load->view('login/login');
+			}
 		}
 
 		else {
@@ -32,22 +33,22 @@ class Mimin_perih extends CI_Controller {
 			
 			$result = $this->Login_Database->login_admin($data);
 
-			if ($result == true){
-				if ($result != false) {
-					$session_data = $data['username'];
-					$this->session->set_userdata('admin', $session_data);
-					$this->load->view('admin/index');
-				}
-			}
-			else {
+			if ($result == false){
 				$data = array(
 					'error_message' => 'Invalid Username or Password');
 				$this->load->view('login/login', $data);
+				}
+
+			else {
+				$session_data = $data['username'];
+				$this->session->set_userdata('admin', $session_data);
+				$this->load->view('admin/index');
 			}
 		}
 	}
 
 	function logout(){
+		$this->session->unset_userdata('admin');
 		$this->session->sess_destroy();
 		$this->load->view('login/login');
 	}
