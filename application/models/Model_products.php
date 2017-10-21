@@ -40,5 +40,44 @@
 					 ->delete('produk');
 			$this->db->affected_rows();
 		}
+
+		//Line below for testing purpose
+		public function testing_purpose(){
+			$test = $this->db->get('produk');
+			return $test->num_rows();
+		}
+
+		public function testing_purpose_find($id){
+			$result = $this->db->where('id', $id)
+							   ->get('produk');
+			return $this->db->affected_rows();
+		}
+
+		//Line below for reset database
+		public function testing_reset_purpose_oppose_add_products($id){
+			$this->db->where('id', $id)
+					 ->delete('produk');
+		}
+
+		//belom kelar KERJAIIINNN!!!!
+		public function testing_reset_purpose_oppose_edit(){
+
+		}
+
+		public function testing_reset_purpose_oppose_delete($id){
+			$data = [
+            'id' => 7,
+            'nama_produk' => 'Testing Delete',
+            'jenis' => 'Wedding',
+            'deskripsi' => 'YIHAA',
+            'biaya' => '1'
+        ];
+	        $hasil = $this->db->where('id',$id)
+	        		 ->get('produk');
+	        if($hasil->num_rows==0){
+	        	$this->db->insert('produk', $data);
+	        }
+	        else return false;
+		}
 	}
 ?>
