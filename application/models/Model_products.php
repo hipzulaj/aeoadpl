@@ -38,6 +38,7 @@
 		public function Delete_products($id){
 			$this->db->where('id', $id)
 					 ->delete('produk');
+			$this->db->affected_rows();
 		}
 	}
 ?>

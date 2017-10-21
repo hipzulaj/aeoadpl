@@ -24,6 +24,39 @@
 			$this->db->where('id', $id)
 					 ->delete('booking');
 		}
+
+		public function testing_purpose(){
+			$test = $this->db->get('booking');
+			return $test->num_rows();
+		}
+
+		public function testing_purpose_find($id){
+			$result = $this->db->where('id', $id)
+							   ->get('booking');
+			return $this->db->affected_rows();
+		}
+
+		public function testing_reset_purpose_oppose_cancel_booking($id){
+			$data = [
+            'id' => 1,
+            'cus_name' => 'customer',
+            'produk' => 'Ayam Goreng',
+            'jenis' => 'Wedding',
+            'biaya' => '20000',
+        ];
+	        $hasil = $this->db->where('id',$id)
+	        		 ->get('booking');
+	        if($hasil->num_rows==0){
+	        	$this->db->insert('booking', $data);
+	        }
+	        else return false;
+		}
+
+		//Yang bawah belom kelar
+		public function testing_reset_purpose_oppose_booking($id){
+			$this->db->where('id', $id)
+					 ->delete('booking');
+		}
 	}
 
 ?>

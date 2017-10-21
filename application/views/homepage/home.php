@@ -123,12 +123,10 @@
                   <h5>Rp.<?=$product->biaya?></h5>
                   <h6><?=$product->jenis?></h6>
                   <p class="card-text"><?=$product->deskripsi?></p>
-                  <?= form_open('customer/booking') ?>
+                  <?= form_open('customer/booking/' .$product->id) ?>
                  <!-- <form action="<?php echo site_url('customer/booking') ?>" method="post" accept-charset="utf-8"> -->
                     <input type="hidden" name="user" value="<?=$this->session->userdata('customer')?>">
-                    <input type="hidden" name="jenis" value="<?=$product->jenis?>"/>
-                    <input type="hidden" name="name" value="<?=$product->nama_produk?>"/>
-                    <input type="hidden" name="biaya" value="<?=$product->biaya?>" />
+                    <input type="hidden" name="jenis" value="<?=$product->id?>"/>
                     <input type="submit" name="action" value="Book!" class="fg-button teal"/>
                     <?= form_close() ?>
                 </div>
