@@ -11,6 +11,8 @@ class login_customer_test extends TestCase
 {	
 	/**
      * @covers user::login
+     * @covers Login_Database
+     * @covers Model_booking
      */
 	
 	public function setUp()

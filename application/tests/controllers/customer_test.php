@@ -1,0 +1,85 @@
+<?php
+/**
+ * Part of ci-phpunit-test
+ *
+ * @author     Kenji Suzuki <https://github.com/kenjis>
+ * @license    MIT License
+ * @copyright  2015 Kenji Suzuki
+ * @link       https://github.com/kenjis/ci-phpunit-test
+ */
+class customer_test extends TestCase
+{	
+
+	public function setUp()
+    {
+        $this->resetInstance();
+        $this->CI->load->model('Model_booking');
+        $this->CI->Model_booking->reset_auto_increment_booking();
+    }
+
+    //Test Booking
+    public function test_booking(){
+    	$_SESSION['customer'] = 'customer';
+    	$expectedGet = $this->CI->Model_booking->testing_purpose()+1;
+
+    	$output = $this->request('POST', 'customer/booking/4', ['user' => $_SESSION['customer']
+    		]);
+
+    	$actualGet = $this->CI->Model_booking->testing_purpose();
+    	$this->assertEquals($expectedGet, $actualGet);
+
+    	$actualFind = $this->CI->Model_booking->testing_purpose_find(5);
+    	$expectedFind_affected_rows = 1;
+    	$this->assertEquals($expectedFind_affected_rows, $actualFind);
+
+    	$this->CI->Model_booking->testing_reset_purpose_oppose_booking(5);
+    }
+
+    public function test_booking_wrong_id(){
+    	$_SESSION['customer'] = 'customer';
+    	$output = $this->request('GET', 'customer/booking/999');
+    	$this->assertResponseCode(404);
+    }
+
+    public function test_booking_nologged(){
+    	$output = $this->request('GET', 'customer/booking');
+    	$this->assertRedirect('display/login');
+    }
+
+    //End Of Test Booking
+
+    //Test Cancel Booking
+    /**
+     * @covers customer::Cancel_booking
+     * @covers Model_booking
+     */
+    public function test_cancel_booking(){
+    	$_SESSION['customer'] = 'customer';
+    	$expectedGet = $this->CI->Model_booking->testing_purpose()-1;
+
+    	$output = $this->request('GET', 'customer/Cancel_booking/1');
+
+    	$actualGet = $this->CI->Model_booking->testing_purpose();
+    	$this->assertEquals($expectedGet, $actualGet);
+
+    	$actualFind = $this->CI->Model_booking->testing_purpose_find(1);
+    	$expectedFind = 0;
+    	$this->assertEquals($expectedFind, $actualFind);
+
+    	$this->CI->Model_booking->testing_reset_purpose_oppose_cancel_booking(1);
+    }
+
+    public function test_cancel_booking_wrong_id(){
+    	$_SESSION['customer'] = 'customer';
+    	$output = $this->request('GET', 'customer/Cancel_booking/999');
+    	$this->assertResponseCode(404);
+    }
+
+    public function test_cancel_booking_nologged(){
+    	$output = $this->request('GET', 'customer/Cancel_booking/9');
+    	$this->assertRedirect('display/login');
+    }
+
+
+    //End Of Test Cancel Booking
+}

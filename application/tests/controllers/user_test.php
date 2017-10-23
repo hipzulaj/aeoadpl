@@ -12,12 +12,16 @@ class user_test extends TestCase
     public function setUp()
     {
         $this->resetInstance();
+        $this->CI->load->model('Login_Database');
+        $this->CI->Login_Database->reset_auto_increment_cus();
+        $this->CI->Login_Database->reset_auto_increment_eo();
     }
 
     //Register Customer
 
-    public function test_register_cus() //belom kelar
+    public function test_register_cus()
 	{	
+		$expectedGet = $this->CI->Login_Database->testing_purpose_customer()+1;
 		$output = $this->request(
 			'POST',
 			'user/register',
@@ -29,7 +33,8 @@ class user_test extends TestCase
 					'user' => 'Customer'
 				]
 		);
-		$this->assertContains('<title>Login &amp; Register </title>', $output);
+		$actualGet = $this->CI->Login_Database->testing_purpose_customer();
+        $this->assertEquals($expectedGet, $actualGet);
 	}
 
     public function test_register_cus_sv()

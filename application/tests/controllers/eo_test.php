@@ -14,6 +14,7 @@ class eo_test extends TestCase
     {
         $this->resetInstance();
         $this->CI->load->model('Model_products');
+        $this->CI->Model_products->reset_auto_increment_products();
     }
 
     //Test Display Dashboard EO
@@ -72,19 +73,20 @@ class eo_test extends TestCase
     //Test Edit Produk
     public function test_edit_produk(){
         $_SESSION['eo'] = 'eo';
-        $output = $this->request('POST', 'eo/Edit_produk/5',
+        $output = $this->request('POST', 'eo/Edit_produk/4',
             [
                 'nama' => 'Testing Edit Purpose',
                 'harga' => '1',
                 'deskripsi' => 'APAAN DAH',
                 'jenis' => 'Wedding'
             ]);
-        $updated = $this->CI->Model_products->find(5);
+        $updated = $this->CI->Model_products->find(4);
         $actual1 = $updated->nama_produk;
         $actual2 = $updated->deskripsi;
 
         $this->assertEquals('Testing Edit Purpose', $actual1);
         $this->assertEquals('APAAN DAH', $actual2);
+        $this->CI->Model_products->testing_reset_purpose_oppose_edit(4);
     }
 
     public function test_Edit_product_wrong_id(){
@@ -118,16 +120,16 @@ class eo_test extends TestCase
         $_SESSION['eo'] = 'eo';
         $expectedGet = $this->CI->Model_products->testing_purpose()-1;
 
-        $output = $this->request('GET', 'eo/Hapus_produk/7');
+        $output = $this->request('GET', 'eo/Hapus_produk/5');
 
         $actualGet = $this->CI->Model_products->testing_purpose();
         $this->assertEquals($expectedGet, $actualGet);
 
-        $actualFind = $this->CI->Model_products->testing_purpose_find(7);
+        $actualFind = $this->CI->Model_products->testing_purpose_find(5);
         $expectedFind = 0;
         $this->assertEquals($expectedFind, $actualFind);
 
-        $this->CI->Model_products->testing_reset_purpose_oppose_delete(7);
+        $this->CI->Model_products->testing_reset_purpose_oppose_delete(5);
     }
 
     public function test_Delete_produk_wrong_id(){

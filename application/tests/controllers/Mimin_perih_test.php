@@ -11,6 +11,7 @@ class Mimin_perih_test extends TestCase
 {	 
 	/**
      * @covers Mimin_perih
+     * @covers Login_Database
      */
     public function setUp()
     {

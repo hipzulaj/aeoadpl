@@ -11,6 +11,7 @@ class login_eo_test extends TestCase
 {	
 	/**
      * @covers user::login
+     * @covers Login_Database
      */
 	
     public function setUp()
